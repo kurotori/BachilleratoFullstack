@@ -2,20 +2,20 @@ const formulario = document.getElementById('formulario')
 
 
 formulario.addEventListener('submit', 
-    function(e) {
-        e.preventDefault(); // Prevenir el método de envío por descarte
+    function(evento) {
+        evento.preventDefault(); // Prevenir el método de envío por descarte
         
         // Get form data
-        const formData = new FormData(this);
+        const datosFormulario = new FormData(this);
         
         // Send data to PHP script
         fetch('destino.php', {
             method: 'POST',
-            body: formData
+            body: datosFormulario
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+        .then(respuesta => {
+            if ( ! respuesta.ok) {
+                throw new Error('Ha ocurrido un error de comunicación con el servidor');
             }
             return response.text();
         })
